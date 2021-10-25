@@ -22,7 +22,6 @@ document.getElementById("image").src = data.imageUrl;
 document.getElementById("titre").textContent= data.name;
 document.getElementById("description").textContent= data.description;
 document.getElementById("prix").textContent= data.price + ' €';
-
 console.log(data.colors)
 
 let choix_1 = document.createElement("option");
