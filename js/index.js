@@ -9,7 +9,7 @@ fetch('http://localhost:3000/api/teddies', {
         displayOneProduct(product);
     }
 }).catch(err => {
-    console.log('err', err);
+    console.log('err');
     alert('Serveur non disponible');
 });
 
@@ -30,11 +30,15 @@ function displayOneProduct(product) {
     newElement.appendChild(img);
 
     let h2 = document.createElement('h2');
-    h2.innerText = product.name;
+    h2.innerHTML= product.name;
     newElement.appendChild(h2);
 
      let p = document.createElement('p');
-    p.innerText = 'Prix : ' +  product.price.toLocaleString('fr-FR') + '€';
+    p.innerHTML = 'Prix : ' +  product.price.toLocaleString('fr-FR') + '€';
     newElement.appendChild(p);
 
+     let h4 = document.createElement('h4');
+     h4.innerHTML= ('productDescription').textContent = product.description
+     newElement.appendChild(h4);
+     
 }
