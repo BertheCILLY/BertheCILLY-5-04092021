@@ -13,6 +13,7 @@ fetch('http://localhost:3000/api/teddies', {
     alert('Serveur non disponible');
 });
 
+
 //Fonction qui crée les bloc HTML
 
 function displayOneProduct(product) {
@@ -40,5 +41,7 @@ function displayOneProduct(product) {
      let h4 = document.createElement('h4');
      h4.innerHTML= ('productDescription').textContent = product.description
      newElement.appendChild(h4);
-     
+
+
+      
 }
