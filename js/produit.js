@@ -33,10 +33,13 @@ document.getElementById("color-select").appendChild(option);
 
 console.log(data.colors);
 }
+
+});
+
+
+
 // Sélection de l'id du produit 
 const idform = document.querySelector("#bearNum");
-
-
 
 let newElement = document.createElement('div');
 let element = document.getElementById('ours-section');
@@ -59,5 +62,5 @@ teddyRecap(data, newElement);
  console.log(button)
 
 
- 
-});
+
+
