@@ -3,68 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="./style/style.css" />
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+
   <title>ORINOCOURS</title>
 </head>
 <body>
-    <header>
-        <div class="container-fluid">
+      <header>
+       
+        <div class="container-fluid ">
             <div class="row">
-                <nav class="col navbar navbar-expand-md navbar-light">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="img/logo.png" alt=""width="150" alt="logo orinoco">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div id="navbarContent" class="collapse navbar-collapse">
-                        <ul class="navbar-nav  ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Accueil</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="panier.html"><i class="fas fa-shopping-cart"></i>Panier</a>
-                            </li>
-                        </ul>
-                    </div>
+                <nav class="navbar-brand">
+                    <!-------Lien entre les pages avec href = -->
+                    <div class="nav__cart ">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="./img/favicon.png" alt="logo orinoco"></a>
+                  
+                            <a class="btn btn-secondary btn-lg active nav__cart " href="./index.html" 
+                                role="button"aria-pressed="true">Accueil</a>
+
+                            
+                     </div>
+
                 </nav>
             </div>
         </div>
-    </header>
+      </header>
 
-
-    <!-- Section centrale -->
-    <h1 class="col-12 text-center contenu-title">Contenu de votre panier</h1>
-    <div class=" col-12 text-center" id="contenu-panier">
-        <div class=" col-12 text-center" id="panier-section">
-            <div class="panier-recap" id="panier-produit"><span class="panier-title">Produit</span></div>
-            <div class="panier-recap" id="panier-option"><span class="panier-title">Option</span></div>
-            <div class="panier-recap" id="panier-prix"><span class="panier-title">Prix</span></div>
-            <div class="panier-recap" id="panier-bouton"><span class="panier-title"></span></div>
-        </div>
+         <div class="cart-card">  
+             <h1 class="col-12 text-center contenu-title">Contenu de votre panier</h1>
+            <div class=" col-12 text-center" id="contenu-panier">
+                <div class=" col-12 text-center" id="panier-section">
+                 <div class="panier-recap" id="panier-produit"><span class="panier-title">Produit</span></div>
+                    <div class="panier-recap" id="panier-option"><span class="panier-title">Option</span></div>
+                <div class="panier-recap" id="panier-prix"><span class="panier-title">Prix</span></div>
+                <div class="panier-recap" id="panier-bouton"><span class="panier-title"></span></div></div>
         <div id="contenu-total-price" class="panier-totalPrice text-center"></div>
-    </div>
+      </div>
 
-    <div class="col-12 text-center" id="formulaire-section">
-        <h2 class="formulaire-title">Contact pour la commande</h2>
+      <div class="col-12 text-center" id="formulaire-section">
+        <h2 class="formulaire-title">Votre adresse de livraison</h2>
         <form class="formulaire" method="post" name="formContact">
             <label class="formulaire-input" for="nom">Nom : </label>
             <input class="formulaire-input" type="text" name="nom" id="nom" required placeholder="Dupont">
             <span class="formulaire-input formulaire-info"  id="missNom"></span>
 
             <label class="formulaire-input" for="prenom">Prénom : </label>
-            <input class="formulaire-input" type="text" name="prenom" id="prenom" required placeholder="Jean">
+            <input class="formulaire-input" type="text" name="prenom" id="prenom" required placeholder="Henry">
             <span class="formulaire-input formulaire-info" id="missPrenom"></span>
 
             <label class="formulaire-input" for="email">Email : </label>
-            <input class="formulaire-input" type="email" id="email" required placeholder="jean.dupont@xxxxx.com">
+            <input class="formulaire-input" type="email" id="email" required placeholder="Henry.dupont@xxxxx.com">
             <span class="formulaire-input formulaire-info"  id="missEmail"></span>
 
             <label class="formulaire-input" for="adresse">Adresse : </label>
-            <input class="formulaire-input" type="text" name="adresse" id="adresse" required placeholder="10 rue bellevue">
+            <input class="formulaire-input" type="text" name="adresse" id="adresse" required placeholder="14 rue Duhamel">
             <span class="formulaire-input formulaire-info"  id="missAdresse"></span>
 
             <label class="formulaire-input" for="ville">ville : </label>
@@ -74,16 +68,21 @@
             <input id="bouton-commander" class="formulaire-command" type="submit" value="Commander">
         </form>
     </div>
-
+                                                                             </div>   
+<div class="if-empty-cart">
+    <h2>Votre panier est vide. <a href="index.html">Remplissez le d'abord !</a></h2>
+</div>
     <footer>
+
         <div class="container">
             <div class="row footer-item">
                 <a href="">Conditions générales de ventes</a>
                 <a href="mailto:contact@orinoco.fr">Contact</a>
+               
             </div>
         </div>
     </footer>
-    <script type="text/javascript" src="js/panier.js" defer></script>
+    <script type="text/javascript" src="./js/panier.js" defer></script>
 
 </body>
 </html>
