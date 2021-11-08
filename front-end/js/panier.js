@@ -1,63 +1,5 @@
 
 
-
-function displayCart() {
-    let test = document.querySelector(".width-to-empty-cart");
-    let cartCard = document.querySelector(".cart-card");
-    let emptyCart = document.querySelector(".if-empty-cart");
-    
-        console.log(displayCart);
-
-        
-        //Récupération des données du localStorage
-
-    let panier = JSON.parse(localStorage.getItem('products'));
-    let cart = document.querySelector(".contenu-panier");
-
-         consol.log(panier);
-
-        // Si le tableau copié du localStorage contient au moins un objet, on affiche le panier 
-    if (localStorage.getItem("products")) {
-         cartCard.style.display = "flex";
-        cartCard.style.flexDirection = "column";
-        cartCard.style.justifyContent = "space-around";
-         emptyCart.style.display = "none";
-
-    } else {
-            //message d'erreur si soucis d'affichage
-            console.log('Cette adresse ne correspond pas a la page demandée');
-        
-     console.log(products);
-
-
-
-
-        for (let produit in panier) {
-           let productRow = document.createElement("div");
-            cart.insertBefore(productRow, test);
-            productRow.classList.add("text-center", "panier-produit");
-
-            let productName = document.createElement("div");
-            productRow.appendChild(productName);
-            productName.classList.add("panier-title");
-            productName.innerHTML = panier[produit].name;
-
-          let productPrice = document.createElement("div");
-          productRow.appendChild(productPrice);
-          productPrice.classList.add(
-                "panier-title",
-                 "data-price",
-                "price"
-                
-         );
-         console.log(productPrice);
-    
-
-
-
-
-   /*pourquoi ca ne fonctionne pa s????
-
 //fonction de création du contenu de la page
 
 function createLignePanier(index) {
@@ -117,7 +59,6 @@ function createLignePanier(index) {
     button.type = 'button';
     button.value = 'Supprimer'
     newElementButton.appendChild(button);
-
     function deleteLigne() {
         
         let panier = JSON.parse(localStorage.getItem('panier'));
@@ -135,69 +76,65 @@ function createLignePanier(index) {
     button.addEventListener('click',deleteLigne);
 }
 
-//fonction qui met la première lettre en majuscule
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+        // Si le tableau copié du localStorage contient au moins un objet, on affiche le panier 
+    if (localStorage.getItem("products")) {
+         cartCard.style.display = "flex";
+        cartCard.style.flexDirection = "column";
+        cartCard.style.justifyContent = "space-around";
+         emptyCart.style.display = "none";
 
-// fonction qui calcule le prix total et l'insère dans la page
-
-function totalPrice(panier) {
-    
-    let totalPrice = 0;
-    for (let i=0; i<panier.length; i++) {
-        totalPrice = totalPrice + panier[i].price;
-    }
-
-    let elementTotalPrice = document.getElementById('contenu-total-price');
-
-    elementTotalPrice.innerText = 'Le montant total de la commande est : ' + totalPrice.toLocaleString('fr-FR') + '€.';
-
-    localStorage.setItem("totalPriceConfirmation", totalPrice);
-}
-
-//fonction de validation du formulaire et envoie à l'API
-
-function  validation(event) {
-    event.preventDefault();
-    let allValid = true;
-    for (i=0; i < listeId.length; i++) {
-    
-        let verif = document.getElementById(listeId[i]);
-        let missVerif = document.getElementById('miss' + capitalizeFirstLetter(listeId[i]));
-        let nameValid = /^[a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?$/;
-        let adressValid = /^([0-9]+)+[\s][a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?$/;
-        let mailValid = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+    } else {
+            //message d'erreur si soucis d'affichage
+            console.log('Cette adresse ne correspond pas a la page demandée');
         
-        //si le champs est vide
+     console.log(products);
+  
 
-        if(verif.validity.valueMissing){
-            event.preventDefault();
-            missVerif.textContent = 'Champ manquant';
-            missVerif.style.color = 'red';
-            allValid = false;
+        console.log(cartCard);
 
-        // si le format de données n'est pas correct 
+        //création d'une boucle FOR pour copié chaque objet dans le localStorage
 
-        } else if ((listeId[i] == 'nom' || listeId[i] == 'prenom' || listeId[i] == 'ville') && nameValid.test(verif.value) == false) {
-            event.preventDefault();
-            missVerif.textContent = 'Format incorrect';
-            missVerif.style.color = 'red';
-            allValid = false;
-        } else if (listeId[i] == 'adresse' && adressValid.test(verif.value) == false) {
-            event.preventDefault();
-            missVerif.textContent = 'Format incorrect';
-            missVerif.style.color = 'red';
-            allValid = false;
-        } else if (listeId[i] == 'email' && mailValid.test(verif.value) == false) {
-            event.preventDefault();
-            missVerif.textContent = 'Format incorrect';
-            missVerif.style.color = 'red';
-            allValid = false;
-        };
-    }
 
+        function  validation(event) {
+            event.preventDefault();
+            let allValid = true;
+            for (i=0; i < listeId.length; i++) {
+            
+                let verif = document.getElementById(listeId[i]);
+                let missVerif = document.getElementById('miss' + capitalizeFirstLetter(listeId[i]));
+                let nameValid = document.getElementById('name').value;
+                let adressValid = document.getElementById('adress').value;
+                let mailValid = document.getElementById('email').value;
+                
+                //si le champs est vide
+        
+                if(verif.validity.valueMissing){
+                    event.preventDefault();
+                    missVerif.textContent = 'Champ manquant';
+                    missVerif.style.color = 'red';
+                    allValid = false;
+        
+                // si le format de données n'est pas correct 
+        
+                } else if ((listeId[i] == 'nom' || listeId[i] == 'prenom' || listeId[i] == 'ville') && nameValid.test(verif.value) == false) {
+                    event.preventDefault();
+                    missVerif.textContent = 'Format incorrect';
+                    missVerif.style.color = 'red';
+                    allValid = false;
+                } else if (listeId[i] == 'adresse' && adressValid.test(verif.value) == false) {
+                    event.preventDefault();
+                    missVerif.textContent = 'Format incorrect';
+                    missVerif.style.color = 'red';
+                    allValid = false;
+                } else if (listeId[i] == 'email' && mailValid.test(verif.value) == false) {
+                    event.preventDefault();
+                    missVerif.textContent = 'Format incorrect';
+                    missVerif.style.color = 'red';
+                    allValid = false;
+                };
+            }
+        
     if (allValid == true) {
             
         let contactForm = {
@@ -227,10 +164,35 @@ function  validation(event) {
             localStorage.setItem('order', JSON.stringify(data));
             window.location.href = './confirmation.html';
         }).catch(err => {
-   
+            console.log('err', err);
+            alert("Serveur non disponible");
+        })
+    }
+
+    /*
+        for (let produit in panier) {
+           let productRow = document.createElement("div");
+            cart.insertBefore(productRow, test);
+            productRow.classList.add("text-center", "panier-produit");
+
+            let productName = document.createElement("div");
+            productRow.appendChild(productName);
+            productName.classList.add("panier-title");
+            productName.innerHTML = panier[produit].name;
+
+          let productPrice = document.createElement("div");
+          productRow.appendChild(productPrice);
+          productPrice.classList.add(
+                "panier-title",
+                 "data-price",
+                "price"
+                
+         );
+         console.log(productPrice);
+      */
         }
       
+
+        
   
     }
-}   
-    */
