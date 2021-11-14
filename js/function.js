@@ -1,6 +1,7 @@
 /**
  * Si le localStorage est vide ,retourne à  l'accueil
  */
+
 const idSectionContainercartHtml = document.querySelector('#cart-card');
 export function checkIfCartEmpty() {
     if (localStorage.length == 0) {
@@ -9,6 +10,7 @@ export function checkIfCartEmpty() {
     }
     console.log(idSectionContainercartHtml);
 }
+
 
 //class pour la validation du formulaire
 class Form {
