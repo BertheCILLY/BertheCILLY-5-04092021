@@ -1,59 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="./style/style.css" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" >
-  <title>ORINOCOURS</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="css/xsmall.css" media="(max-width:575.98px)"/>
+  <link rel="stylesheet" href="css/small.css" media="(min-width: 576px) and (max-width:767.98px)"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+  <link rel="stylesheet" href="./style.css" />
+  <meta name="description" content="Orinoco spécialiste en appareils photos professionels et de collection" />
+  <title>OrinoPhotos</title>
 </head>
+
 <body>
-    <header>
-        <div class="container-fluid  duration-200  transform scale-102">
-            <div class="row">
-                <nav class="navbar-brand">
-                    <!-------Lien entre les pages avec href = -->
-                    <div class="nav__cart">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="./img/favicon.png" alt="logo orinoco"></a>
-                  
-                 
-                    <a class="btn btn-secondary btn-lg active nav__cart " href="./panier.html" 
-                         role="button" aria-pressed="true">Panier</a>
-                </div>
-                </nav>
-            </div>
-        </div>
-    </header>
+  <header>
+    <img class="logo" src="img/logo-orinoco.png" alt="logo_orinoco"></img>  
+    <nav>
+      <a href="panier.html" id="Panier"> Panier<i class="fas fa-shopping-cart"></i></a>
+    
+    </nav>
+  </header>
 
-  <!-- Section centrale -->
-    <div class="container-fluid">
-        <div class="row title">
-            <div class="col-12 text-center">
-                <h1>Orinocours, le site de e-commerce spécialisé dans les ours en peluche faits main</h1>
-            </div>
-        </div>
+  <div class="image-bandeau">
+    <img src="./img/IMG_0307.jpeg"alt="image-bandeau"></img>  
+    <div class="texte-bandeau">
+      <h1> OrinoPhotos </h1>
+      <p> C'est toujours un plaisir </p>
     </div>
+  </div>
 
-   <!-- Section ours en peluche-->
-    <div class="container-fluid">
-        <div id="ours-section" class="row col-12 ours">               
-        </div>
-    </div>
+  <main>
+    <section id="container">
 
-    <footer>
+    </section>
+  </main>
+  <footer>
+    <div>
+    <ul>
+      <li><a href="#"> A Propos </a></li>
+      <li><a href="#"> Contact </a></li>
+      <li><a href="#"> Conditions d'utilisations </a></li>
+    </ul>
+  </div>
+  </footer>
 
-        <div class="container">
-
-            <div class="footer-item">
-                
-                <a href="">Conditions générales de ventes</a>
-                <a href="mailto:contact@orinoco.fr">Contact</a>
-            </div>
-        </div>
-    </footer>
-    <script type="text/javascript" src="js/index.js" defer></script>
+  <script src="js/index.js"></script>
+  <script src="js/camera.js"></script>
 </body>
+
 </html>

@@ -1,88 +1,114 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="./style/style.css" />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-
-  <title>ORINOCOURS</title>
+  <meta charset="utf-8" />
+ <link rel="stylesheet" href="css/xsmall.css" media="(max-width:575.98px)" />
+  <link rel="stylesheet" href="css/small.css" media="(min-width: 576px) and (max-width:767.98px)" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+  <meta name="description" content="panier orinoco" />
+  <title>Votre panier</title>
 </head>
+
 <body>
-      <header>
-       
-        <div class="container-fluid ">
-            <div class="row">
-                <nav class="navbar-brand">
-                    <!-------Lien entre les pages avec href = -->
-                    <div class="nav__cart ">
-                            <a class="navbar-brand" href="index.html">
-                                <img src="./img/favicon.png" alt="logo orinoco"></a>
-                  
-                            <a class="btn btn-secondary btn-lg active nav__cart " href="./index.html" 
-                                role="button"aria-pressed="true">Accueil</a>
+  <header>
+    <img class="logo" src="./img/logo-orinoco.png" alt="logoorinoco" />
+    <nav>
+      <nav>
+    
+        <a href="index.html"> Accueil <i class="fas fa-store"></i></a>
+      </nav>
+    </nav>
+  </header>
 
-                            
-                     </div>
-
-                </nav>
-            </div>
-        </div>
-      </header>
-
-         <div class="cart-card">  
-             <h1 class="col-12 text-center contenu-title">Contenu de votre panier</h1>
-            <div class=" col-12 text-center" id="contenu-panier">
-                <div class=" col-12 text-center" id="panier-section">
-                 <div class="panier-recap" id="panier-produit"><span class="panier-title">Produit</span></div>
-                    <div class="panier-recap" id="panier-option"><span class="panier-title">Option</span></div>
-                <div class="panier-recap" id="panier-prix"><span class="panier-title">Prix</span></div>
-                <div class="panier-recap" id="panier-bouton"><span class="panier-title"></span></div></div>
-        <div id="contenu-total-price" class="panier-totalPrice text-center"></div>
-      </div>
-
-      <div class="col-12 text-center" id="formulaire-section">
-        <h2 class="formulaire-title">Votre adresse de livraison</h2>
-        <form class="formulaire" method="post" name="formContact">
-            <label class="formulaire-input" for="nom">Nom : </label>
-            <input class="formulaire-input" type="text" name="nom" id="nom" required placeholder="Dupont">
-            <span class="formulaire-input formulaire-info"  id="missNom"></span>
-
-            <label class="formulaire-input" for="prenom">Prénom : </label>
-            <input class="formulaire-input" type="text" name="prenom" id="prenom" required placeholder="Henry">
-            <span class="formulaire-input formulaire-info" id="missPrenom"></span>
-
-            <label class="formulaire-input" for="email">Email : </label>
-            <input class="formulaire-input" type="email" id="email" required placeholder="Henry.dupont@xxxxx.com">
-            <span class="formulaire-input formulaire-info"  id="missEmail"></span>
-
-            <label class="formulaire-input" for="adresse">Adresse : </label>
-            <input class="formulaire-input" type="text" name="adresse" id="adresse" required placeholder="14 rue Duhamel">
-            <span class="formulaire-input formulaire-info"  id="missAdresse"></span>
-
-            <label class="formulaire-input" for="ville">ville : </label>
-            <input class="formulaire-input" type="text" name="ville" id="ville" required placeholder="Paris">
-            <span class="formulaire-input formulaire-info" id="missVille"></span>
-
-            <input id="bouton-commander" class="formulaire-command" type="submit" value="Commander">
-        </form>
+  <div class="image-bandeau">
+    <img src="img/IMG_0307.jpeg" alt="image-bandeau" />
+    <div class="texte-bandeau">
+      <h1> OrinoPhotos </h1>
+      <p> Votre Panier </p>
     </div>
-                                                                             </div>   
-<div class="if-empty-cart">
-    <h2>Votre panier est vide. <a href="index.html">Remplissez le d'abord !</a></h2>
-</div>
-    <footer>
+  </div>
 
-        <div class="container">
-            <div class="row footer-item">
-                <a href="">Conditions générales de ventes</a>
-                <a href="mailto:contact@orinoco.fr">Contact</a>
-               
-            </div>
-        </div>
-    </footer>
-    <script type="text/javascript" src="./js/panier.js" defer></script>
+  <section class="recap-commande">
+    <table id="container">
 
+      <thead>
+        <tr>
+          <th class="srcimage">Photos</th>
+          <th> Nom </th>
+          <th> Prix Unitaire </th>
+          <th> Quantitée </th>
+          <th> Supprimer </th>
+          <th> Prix Total </th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td> TOTAL </td>
+        <td id="prixTotal"></td>
+      </tr>
+      </tfoot>
+      
+    </table>
+
+    <button id="viderPanier" class="viderPanier">Vider tous le Panier </button>
+  </section>
+
+  <form action="#" method="POST" id="form">
+    <div>
+      <input type="radio" id="Mr" name="drone" value="Mr" checked>
+      <label for="Mr">Mr</label>
+
+      <input type="radio" id="Mme" name="drone" value="Mme">
+      <label for="Mme">Mme</label>
+    </div>
+
+    <div>
+      <label for="nom">Nom *:</label><br />
+      <input type="text" id="nom" name="nom" required="required" placeholder="Martin" />
+    </div>
+
+    <div>
+      <label for="prenom">Prenom *:</label><br />
+      <input type="text" id="prenom" name="prenom" required="required" placeholder="Dupont" />
+    </div>
+
+    <div>
+      <label for="adresse">Adresse *:</label><br />
+      <input type="text" id="adresse" name="adresse" required="required" placeholder="3 rue des Lylas" />
+    </div>
+
+    <div>
+      <label for="ville">Ville *:</label><br />
+      <input type="text" id="ville" name="text" required="required" placeholder=" Paris "
+        pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" />
+    </div>
+
+    <div>
+      <label for="email">E-mail *:</label><br />
+      <input type="email" id="email" name="email" required="required" placeholder="dupont@yahoo.fr"
+        pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}" />
+    </div>
+
+    <input type="submit" value="Commander" id="envoiFormulaire" />
+
+    <p>* Champ Obligatoire</p>
+  </form>
+
+  <footer>
+    <ul>
+      <li><a href="#"> A Propos </a></li>
+      <li><a href="#"> Contact </a></li>
+      <li><a href="#"> Conditions d'utilisations </a></li>
+    </ul>
+  </footer>
+  <script  src="js/camera.js"></script>
+  <script src="js/panier.js"></script>
 </body>
+
 </html>
