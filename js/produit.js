@@ -1,107 +1,84 @@
+//Récupératio de l'URL
+let params = (new URL(document.location)).searchParams;
 
+//Stock de l'ID 
+const id = params.get("id");
 
-//Identification de l'id de l'article et récupération de l'id de la page
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
+//Emplacement de l'html
+let container = document.getElementById("container");
 
-const id = urlParams.get('id');
+// Fonction envoie localStorage
+const addLocalStorage = panier => {
+  localStorage.setItem('panier', JSON.stringify(panier));
+};
 
-// récupération des données et affichage
+// Inclus l'html
+const display = camera => {
+  container.innerHTML +=`
+    <div class="appareil" id="cardsProduct">
+      <img src=${camera.imageUrl} alt="">
+      <div class="description">
+        <p class="nom">${camera.name}</p>
+        <span class="appareilDescription">
+          ${camera.description}
+        </span>
+        <select class="options" id ="option">
+          <option>Choix options</option>
+        </select>
+        <p class="prix"> Prix Unitaire: ${camera.price/ 100}€</p>
+        <select class="quantite" id="quantity">           
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>         
+        <a href ="panier.html"><button type ="submit" id="panier" value="submit"> Ajouter au panier</button></a>
+      </div>
+    </div>
+  `;
+  // Pour le choix des options
+  for (let lenses of camera.lenses){
+    document.getElementById('option').innerHTML+=
+    `<option value="1">${lenses}</option>`
+  }
+  // Ecouter l'évènement au "click"+ FNCT addProductBasket
+  document.getElementById('panier').addEventListener('click', function () {
+    addProductBasket(camera)
+  });
+};
 
-fetch('http://localhost:3000/api/teddies/'+id)
+//Pour ajouter au panier
+const addProductBasket = camera=> {
+  camera.quantity = parseInt(document.getElementById('quantity').value);
 
-        .then(function(response) {
-             return response.json();
-  
-    }).then(function(data)
-    
- {
+  //RECUPERE PANIER//memo : let variable=(condition)? "valeursi vrai": "valeur si faux"
+  let panier = localStorage.getItem('panier') ? JSON.parse(localStorage.getItem('panier')) : [];
 
-   
-  //Création de la carte avec l'image , le titre la description et le prix en euro
-    document.getElementById("image").src = data.imageUrl;
-    document.getElementById("titre").textContent= data.name;
-    document.getElementById("description").textContent= data.description;
-    document.getElementById("prix").textContent= data.price + ' €';
-   
+  //Boucle FOR parcour la ligne panier
+  let cameraExistIndex = false;
+  for (let i = 0; i < panier.length; i++) {
+    let product = panier[i];
+    //Condition si le produit existe
+    if (product.id === camera.id) {
+      cameraExistIndex = i;
+    }
+  };
+  // SI Caméra existe dans le panier
+  if (false !== cameraExistIndex) {
+    panier[cameraExistIndex].quantity = parseInt(panier[cameraExistIndex].quantity) + camera.quantity;
+  } else {
+    panier.push(camera);
+  };
+  addLocalStorage(panier)
+};
 
-        //  Création des choix de couleur à chaque passage sur la boucle
-
-        let option = document.createElement('option');
-        for (let i=0; i < data.colors.length; i++) {
-       
-        option = document.createElement('option');
-        option.setAttribute('value', data.colors[i]);
-        option.textContent = data.colors[i];
-        document.getElementById("color-select").appendChild(option);
-
-     
-        }
-
-       
-      
-
-           // function addToCart() {
-            const addToCartBtn = document.querySelector(".add-to-cart");
-            const confirmation = document.querySelector(".added-to-cart-confirmation");
-             const textConfirmation = document.querySelector(".confirmation-text");
-    
-
-            
-            addToCartBtn.addEventListener("click", () => {
-
-
-                   // ------ Création du produit qui sera ajouté au panier
-                let productAdded = {
-                  name: data.name,
-                  price: data.price,
-                   _id: id,
-                  color:document.getElementById("color-select").value,
-
-                 
-                }; 
-        
-              
-                      // Si le localStorage existe, on récupère son contenu, on l'insère dans le tableau arrayProductsInCart, puis on le renvoit vers le localStorage avec le nouveau produit ajouté.
-                let arrayProductInCart ;
-                arrayProductsInCart = localStorage.getItem("products");
-                          //On regarde si on a une variable "products"dans notre storage
-                  if (arrayProductsInCart === null ){
-
-                  arrayProductsInCart = [] ; //si le panier est null tu me crée un tableau vide
-                  }
-                      else{
-
-                          //Sinon dans "arrayProducts" on reprend ce qui exist et on fait un JsonParse pour recuperer notre tableau de produit
-                      arrayProductsInCart = JSON.parse(localStorage.getItem("products"));
-                              
-                  }
-
-                         /*
-                       // Fenêtre pop Pup
-                       const popPupConfirmation = () => {
-
-                            if (window.confim (`${data.name} option: ${color-select} à bien ètè ajouté au panier, consultez le panier OK ou revenir à l'accueil ANNULER`)){
-                              window.location.href = "panier.html";
-                            }else{
-                              window.location.href = "index.html";
-                            }
-                            }
-                            
-                                */
-                  
-                     arrayProductsInCart.push(productAdded);
-                    localStorage.setItem("products", JSON.stringify(arrayProductsInCart));
-                    //On ajoute notre produit a notre tableau et qu'on remet notre tableau en storage (uniquement en format "sting")
-            
-         
-           
-            
-          
-            })
-
-    }); 
-  
-
-
-
+    // APPELLE API AVEC FETCH
+  fetch("http://localhost:3000/api/cameras/" + id)
+  .then(response => response.json())
+  .then(function (product) {
+    let camera = new Camera(product)
+    display(camera);
+        })
+        // SI PROBLEME API
+        .catch(function(err){
+          console.log("fetch Error")
+      });
