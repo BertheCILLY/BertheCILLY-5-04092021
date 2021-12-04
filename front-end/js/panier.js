@@ -1,198 +1,136 @@
 
 
-//fonction de création du contenu de la page
+// Récupération de panier dans le localStorage
+let cameras = JSON.parse(localStorage.getItem("panier")) ? JSON.parse(localStorage.getItem("panier")) : [];
 
-function createLignePanier(index) {
-    let newElementTeddy = document.createElement('div');
-    let elementTeddy = document.getElementById('panier-produit');
+//L'eplacement de l'HTMLL
+let container = document.getElementById("container");
 
-    newElementTeddy.classList.add('panier-detail');
-    newElementTeddy.classList.add('text-center');
-    elementTeddy.appendChild(newElementTeddy);
+// Initialisation du prix total du panier à 0 
+let prixPanier = 0;
 
-    //création du contenu du produit panier
+//Récupération de l'ID PRODUIT
+let addIdBasket = [];
 
-    let teddyName = document.createElement('p');
-    teddyName.innerText = index.name;
-    newElementTeddy.appendChild(teddyName);
+//Fonctio calcul Prix Total du panier et envoie au localStorage
+function priceTotalBasket(camera){
+  prixPanier += camera.quantity * camera.price / 100;
+  //afficher et envoyer 
+  let prixTotal = document.getElementById('prixTotal').textContent = prixPanier + " € ";
+  localStorage.setItem('prixTotal', JSON.stringify(prixTotal));
+};
 
-    let teddyImg = document.createElement('img');
-    teddyImg.src = index.img;
-    teddyImg.classList.add('teddy-img');
-    newElementTeddy.appendChild(teddyImg);
 
-    //Ajoute l'option de couleur choisie
+//Boucle sur le panier
+cameras.forEach((camera, i) => {
+  container.innerHTML += `
+    <tr>
+        <td class="srcimage"><img src=${camera.imageUrl} alt="" /></td>
+        <td>${camera.name}</td>
+        <td>${camera.price / 100} €</td>
+        <td>${camera.quantity}</td>
+        <td><a href="#" class="deleteCamera" data-id="${i}"> <i class="fas fa-trash-alt"></i></a></td>
+        <td >${camera.quantity * camera.price / 100} €</td>
+    </tr>
+  `;
+  //j'appel la fonction
+  priceTotalBasket(camera)
+ 
+ //Boucle qui incémente l'ID produit
+  for (let i = 0; i < camera.quantity; i++) {
+    addIdBasket .push(camera.id);
+  }
+});
 
-    let newElementOption = document.createElement('div');
-    let elementOption = document.getElementById('panier-option');
-    elementOption.appendChild(newElementOption);
 
-    newElementOption.classList.add('panier-color');
+function deleteCamera(id) {
+    let camera = cameras[id];
+    if (camera.quantity > 1) {
+      camera.quantity--;
+    } else {
 
-    let teddyColor = document.createElement('p');
-    teddyColor.innerText = index.color ? index.color : 'Aucune option';
-    
-    newElementOption.appendChild(teddyColor);
+      cameras.splice(id, 1);//La méthode splice() modifie le contenu d'un tableau en retirant des éléments et/ou en ajoutant de nouveaux éléments à même le tableau.On peut ainsi vider ou remplacer une partie d'un tableau.
 
-    //Ajoute le prix
-
-    let newElementPrice = document.createElement('div');
-    let elementPrice = document.getElementById('panier-prix');
-    elementPrice.appendChild(newElementPrice);
-
-    newElementPrice.classList.add('panier-price');
-
-    let price = document.createElement('p');
-    price.innerText = index.price.toLocaleString('fr-FR') + ' €';
-    newElementPrice.appendChild(price);
-
-    //Ajoute le bouton supprimer
-
-    let newElementButton = document.createElement('div');
-    let elementButton = document.getElementById('panier-bouton');
-    elementButton.appendChild(newElementButton);
-
-    newElementButton.classList.add('panier-button');
-
-    let button = document.createElement('input');
-    button.id = 'bouton-supprimer';
-    button.type = 'button';
-    button.value = 'Supprimer'
-    newElementButton.appendChild(button);
-    function deleteLigne() {
-        
-        let panier = JSON.parse(localStorage.getItem('panier'));
-        panier.splice(index,1);
-        localStorage.setItem('panier', JSON.stringify(panier));
-        
-        newElementPrice.remove();
-        newElementOption.remove();
-        newElementTeddy.remove();
-        newElementButton.remove();
-
-        totalPrice(panier);
     }
+    localStorage.setItem('panier', JSON.stringify(cameras));// sur une key/value mettre le panier dans le LS
+    window.location.reload();// recharge la ressource depuis l'URL actuelle
+  }
+  
 
-    button.addEventListener('click',deleteLigne);
+
+// Supprimer un produit du panier avec Delete
+document.querySelectorAll(".deleteCamera").forEach(delBtn => {
+  delBtn.addEventListener('click', () => deleteCamera(delBtn.dataset.id))
+});
+
+//addEventListener=écouter l'évènement façon call back 
+
+let viderPanier = document.getElementById('viderPanier')
+viderPanier.addEventListener('click',  deleteBasket);
+
+//Fonction pour supprimer tout le panier avec .remove.clear.reload.
+function deleteBasket() {
+  if (cameras == null) {
+  } else {
+    container.remove();//sup
+    localStorage.clear();  
+    window.location.reload();// pour recharger la page
+  }
+};
+
+//// GESTION DU FORMULAIRE ////
+// Récupérer des valeurs du formulaire pour les mettre dans le local storage
+function sendOrder() {// méthode reportValidity, renvoie true
+  let form = document.getElementById("form");
+  if (form.reportValidity() == true && addIdBasket.length>0) {// contient le nombre d'arguments passés à la fonction.
+    let contact = {
+      'firstName': document.getElementById("nom").value,
+      'lastName': document.getElementById("prenom").value,
+      'address': document.getElementById("adresse").value,
+      'city': document.getElementById("ville").value,
+      'email': document.getElementById("email").value
+    };
+ 
+    let products = addIdBasket;
+
+    let formulaireClient = JSON.stringify({
+      contact,
+      products,
+    });
+
+
+    // Apel de l'API avec la propriété ORDER (définis l'ordre on dessine les éléments) // ENVOIE DES DONNEES AVEC POST 
+    fetch('http://localhost:3000/api/cameras/order', {//envoyer la requette a l'API de la commande 
+      method: 'POST',
+      headers: {
+        'content-type': "application/json"
+      },
+      mode: "cors",//interdit les requêtes d'origines différentes par défaut et ce pour des raisons de sécurité
+      body: formulaireClient
+      })
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (r) {
+        //clear the localStorage after command
+        localStorage.clear();
+        //redirection vers confirmation.html
+        localStorage.setItem("contact", JSON.stringify(r.contact));
+        window.location.assign("confirmation.html?orderId=" + r.orderId);
+      })
+      //SI PROBLEME API
+      .catch(function (err) {
+        console.log("fetch Error");
+      });
+  }
+  else{
+    alert(" Une erreur est survenue votre panier il est  peux étre vide ou le formulaire n'a pas été correctement rempli!")
+  };
 }
 
+let envoiFormulaire = document.getElementById("envoiFormulaire");
 
-        // Si le tableau copié du localStorage contient au moins un objet, on affiche le panier 
-    if (localStorage.getItem("products")) {
-         cartCard.style.display = "flex";
-        cartCard.style.flexDirection = "column";
-        cartCard.style.justifyContent = "space-around";
-         emptyCart.style.display = "none";
-
-    } else {
-            //message d'erreur si soucis d'affichage
-            console.log('Cette adresse ne correspond pas a la page demandée');
-        
-     console.log(products);
-  
-
-        console.log(cartCard);
-
-        //création d'une boucle FOR pour copié chaque objet dans le localStorage
-
-
-        function  validation(event) {
-            event.preventDefault();
-            let allValid = true;
-            for (i=0; i < listeId.length; i++) {
-            
-                let verif = document.getElementById(listeId[i]);
-                let missVerif = document.getElementById('miss' + capitalizeFirstLetter(listeId[i]));
-                let nameValid = document.getElementById('name').value;
-                let adressValid = document.getElementById('adress').value;
-                let mailValid = document.getElementById('email').value;
-                
-                //si le champs est vide
-        
-                if(verif.validity.valueMissing){
-                    event.preventDefault();
-                    missVerif.textContent = 'Champ manquant';
-                    missVerif.style.color = 'red';
-                    allValid = false;
-        
-                // si le format de données n'est pas correct 
-        
-                } else if ((listeId[i] == 'nom' || listeId[i] == 'prenom' || listeId[i] == 'ville') && nameValid.test(verif.value) == false) {
-                    event.preventDefault();
-                    missVerif.textContent = 'Format incorrect';
-                    missVerif.style.color = 'red';
-                    allValid = false;
-                } else if (listeId[i] == 'adresse' && adressValid.test(verif.value) == false) {
-                    event.preventDefault();
-                    missVerif.textContent = 'Format incorrect';
-                    missVerif.style.color = 'red';
-                    allValid = false;
-                } else if (listeId[i] == 'email' && mailValid.test(verif.value) == false) {
-                    event.preventDefault();
-                    missVerif.textContent = 'Format incorrect';
-                    missVerif.style.color = 'red';
-                    allValid = false;
-                };
-            }
-        
-    if (allValid == true) {
-            
-        let contactForm = {
-            lastName : document.getElementById(listeId[0]).value,
-            firstName : document.getElementById(listeId[1]).value,
-            email : document.getElementById(listeId[2]).value,
-            address : document.getElementById(listeId[3]).value,
-            city : document.getElementById(listeId[4]).value, 
-        }
-
-        let produitPost = [];
-        for (let i=0;i<panier.length; i++) {
-            produitPost.push(panier[i].id)
-        }
-
-        let objetPost = {
-            contact : contactForm,
-            products : produitPost
-        }
-
-        fetch('http://localhost:3000/api/teddies/order', {
-           
-            body: JSON.stringify(objetPost)
-        }).then(function(response) {
-            return response.json();
-        }).then(function(data) {
-            localStorage.setItem('order', JSON.stringify(data));
-            window.location.href = './confirmation.html';
-        }).catch(err => {
-            console.log('err', err);
-            alert("Serveur non disponible");
-        })
-    }
-
-    /*
-        for (let produit in panier) {
-           let productRow = document.createElement("div");
-            cart.insertBefore(productRow, test);
-            productRow.classList.add("text-center", "panier-produit");
-
-            let productName = document.createElement("div");
-            productRow.appendChild(productName);
-            productName.classList.add("panier-title");
-            productName.innerHTML = panier[produit].name;
-
-          let productPrice = document.createElement("div");
-          productRow.appendChild(productPrice);
-          productPrice.classList.add(
-                "panier-title",
-                 "data-price",
-                "price"
-                
-         );
-         console.log(productPrice);
-      */
-        }
-      
-
-        
-  
-    }
+envoiFormulaire.addEventListener('click', function (event) {
+  event.preventDefault();// si l'évènement n'est pas explicitement géré, l'action par défaut ne devrait pas être exécutée 
+  sendOrder();
+});
