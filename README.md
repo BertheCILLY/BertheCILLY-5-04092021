@@ -80,4 +80,4 @@ présences doivent être validés avant l’envoi des données au serveur.
 
 **CCL ET REMERCIEMENT**
 <p> C'est mon premier projet en java script trés long à charger mais qui ma permis d'acquerir de nombreuses connaissances supplementaires. 
-Je tiens à remercier ma mentor et mes collègues pour leurs aides </p>
+Je tiens à remercier ma mentor et mes collègues sur Discord pour leurs aides </p>
