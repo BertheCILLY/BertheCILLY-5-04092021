@@ -13,16 +13,36 @@
 
 **INTRODUCTION**
 
-<p>Voici mon 5 ème projet demander pour ma formation developpeur web ( chez Open Class Rooms). 
+<p>Voici mon 5 ème projet demander pour ma formation developpeur web ( chez Open Class Rooms).</br>
 Pour chaque projet un scenario et un cahier des charges m'ait donner</p>
 
 **PRESENTATION DU PROJET**
 
+<p> Choix à faire entre les 3 propositions suivantes : </br>
+● ours en peluche faits à la main ; </br>
+● caméras vintage ; </br>
+● meubles en chêne. </br>
+
+**URL des API**
+
+● Ours en peluche faits à la main : http://localhost:3000/api/teddies</br>
+● Caméras vintage : http://localhost:3000/api/cameras</br>
+● Meubles en chêne : http://localhost:3000/api/furniture</br>
+
+<p> Pour mon projet j'ai choisis les Cameras </p>
+
+Vous aurez besoin d’avoir Node et npm installés localement sur votre machine.</p>
+
+** Installation **
+
+<p> Clonez ce repo. À partir du dossier du projet, exécutez ’npm install'. Vous
+peut ensuite exécuter le serveur avec `node server'.
+Le serveur doit fonctionner sur l’hôte local avec le port par défaut "3000". Si
+serveur tourne sur un autre port pour une raison quelconque, ceci est imprimé dans le
+au démarrage du serveur, p. ex., « Écoute sur le port 3001 ».
 <p> Recrutée en tant que developpeur front-end par une entreprise de commerce en ligne ( Orinoco).
 On me demande de crée un MVP ( back end deja fournie) . 3 choix de type de produit me sont donner .
-Ce projet portera sur les apareils photos .
- 
-</p> 
+Ce projet portera sur les apareils photos .</p> 
 
 **CAHIER MVP** 
 
