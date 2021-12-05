@@ -7,9 +7,9 @@
 
 <p>Afin de visualiser correctement le projet veuillez suivre les étapes ci dessous:</br>
 1- Cloner ou télécharger les dossiers</br>
-2- Ouvrire avec votre logiciel de traitement ( vscode ou autres )</br>
-3- Ouvrire un nouveau terminal </br>
-4- Rentrer : cd BACK-END  puis node server ( pour lancer l'API)</br></p>
+2- Ouvrir avec votre logiciel de traitement ( vscode ou autres )</br>
+3- Ouvrir un nouveau terminal </br>
+4- Se placer grace au paramètre CD dans le terminal sur votre BACK-END  puis tapper node server ( pour lancer le terminal sur le port 3000)</br></p>
 
 **INTRODUCTION**
 
@@ -31,18 +31,17 @@ Pour chaque projet un scenario et un cahier des charges m'ait donner</p>
 
 <p> Pour mon projet j'ai choisis les Cameras </p>
 
-Vous aurez besoin d’avoir Node et npm installés localement sur votre machine.</p>
+Vous aurez besoin d’avoir Node.js et npm installés localement sur votre machine.</p>
 
 ** Installation **
 
-<p> Clonez ce repo. À partir du dossier du projet, exécutez ’npm install'. Vous
-peut ensuite exécuter le serveur avec `node server'.
+<p> Clonez ce repo https://github.com/OpenClassrooms-Student-Center/JWDP5.git À partir du dossier du projet, exécutez ’npm install'. Vouspeut ensuite exécuter le serveur avec `node server'.
 Le serveur doit fonctionner sur l’hôte local avec le port par défaut "3000". Si
 serveur tourne sur un autre port pour une raison quelconque, ceci est imprimé dans le
 au démarrage du serveur, p. ex., « Écoute sur le port 3001 ».
 <p> Recrutée en tant que developpeur front-end par une entreprise de commerce en ligne ( Orinoco).
 On me demande de crée un MVP ( back end deja fournie) . 3 choix de type de produit me sont donner .
-Ce projet portera sur les apareils photos .</p> 
+Ce projet portera sur les apareils photos .</p>
 
 **CAHIER MVP** 
 
