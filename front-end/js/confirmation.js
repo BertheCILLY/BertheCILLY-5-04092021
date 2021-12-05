@@ -8,7 +8,9 @@ let orderId = paramsUrl.get("orderId");
 let contact = JSON.parse(localStorage.getItem("contact"));
 
 //je récupère le total
+
 let prixTotal = JSON.parse(localStorage.getItem("prixTotal"));
+
 
 // J'affiche la page HTML
 function display (){

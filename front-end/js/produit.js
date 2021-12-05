@@ -22,16 +22,12 @@ const display = camera => {
         <span class="appareilDescription">
           ${camera.description}
         </span>
+        <p> Choix options: </p>
         <select class="options" id ="option">
-          <option>Choix options</option>
         </select>
         <p class="prix"> Prix Unitaire: ${camera.price/ 100}€</p>
-        <select class="quantite" id="quantity">           
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>         
-        <a href ="panier.html"><button type ="submit" id="panier" value="submit"> Ajouter au panier</button></a>
+        <input class="quantite" id="quantity" type="number" value="1">                    
+       <button type ="submit" id="panier" value="submit"> Ajouter au panier</button>
       </div>
     </div>
   `;
@@ -42,9 +38,10 @@ const display = camera => {
   }
   // Ecouter l'évènement au "click"+ FNCT addProductBasket
   document.getElementById('panier').addEventListener('click', function () {
-    addProductBasket(camera)
-
-  });console.log(camera);
+    addProductBasket(camera);
+    window.location.href = "panier.html";
+  });
+  console.log(camera);
 };
 
 
@@ -53,6 +50,8 @@ const display = camera => {
 //Pour ajouter au panier
 const addProductBasket = camera=> {
   camera.quantity = parseInt(document.getElementById('quantity').value);
+  option = document.getElementById('option').value;
+  camera.selectLens(option);
 
   //RECUPERE PANIER//memo : let variable=(condition)? "valeur si vrai": "valeur si faux"
   let panier = localStorage.getItem('panier') ? JSON.parse(localStorage.getItem('panier')) : [];//si le panier est null tu me crée un tableau vide,      
@@ -73,7 +72,7 @@ const addProductBasket = camera=> {
   } else {
     panier.push(camera);
   };
-  addLocalStorage(panier)
+  addLocalStorage(panier);
 };
 
    // récupération des données et affichage

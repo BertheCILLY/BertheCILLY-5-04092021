@@ -4,10 +4,10 @@ let container = document.getElementById("container");//variable pr pointer un é
 const display = camera => {
     container.innerHTML += 
     `
-    <article <a href="produit.html?id="cardsProduct" class="produit">
-        <img src=${camera.imageUrl} alt="photos produits" /></a>
+    <article class="produit">
+        <img src=${camera.imageUrl} alt="photos produits" class="produit" onclick="window.location.href='produit.html?id=${camera.id}'"/>
         <div class="bloqueDescription">
-            <h2> ${camera.name}</h2>
+            <h2> <a href="produit.html?id=${camera.id}">${camera.name}</a> </h2>
             <p>${camera.price / 100}€</p>
         </div>
         <p>${camera.description}</p>

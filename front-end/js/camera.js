@@ -16,4 +16,9 @@ class Camera {//constructor est une méthode qui est utilisée pour créer et in
         this.lenses = lenses;
         this.quantity = parseInt(quantity, 10); // transforme chaine de caractère en nombre
     }
+
+    selectLens(lens){
+        this.selectedLens = lens;
+    }
+
 };

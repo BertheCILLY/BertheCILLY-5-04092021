@@ -20,13 +20,15 @@ function priceTotalBasket(camera){
   localStorage.setItem('prixTotal', JSON.stringify(prixTotal));
 };
 
-
+// Réinitialise le prix total du panier
+localStorage.setItem('prixTotal', 0);
 //Boucle sur le panier
 cameras.forEach((camera, i) => {
   container.innerHTML += `
     <tr>
         <td class="srcimage"><img src=${camera.imageUrl} alt="" /></td>
         <td>${camera.name}</td>
+        <td>${camera.selectedLens}</td>
         <td>${camera.price / 100} €</td>
         <td>${camera.quantity}</td>
         <td><a href="#" class="deleteCamera" data-id="${i}"> <i class="fas fa-trash-alt"></i></a></td>
@@ -45,13 +47,7 @@ cameras.forEach((camera, i) => {
 
 function deleteCamera(id) {
     let camera = cameras[id];
-    if (camera.quantity > 1) {
-      camera.quantity--;
-    } else {
-
-      cameras.splice(id, 1);//La méthode splice() modifie le contenu d'un tableau en retirant des éléments et/ou en ajoutant de nouveaux éléments à même le tableau.On peut ainsi vider ou remplacer une partie d'un tableau.
-
-    }
+    cameras.splice(id, 1);//La méthode splice() modifie le contenu d'un tableau en retirant des éléments et/ou en ajoutant de nouveaux éléments à même le tableau.On peut ainsi vider ou remplacer une partie d'un tableau.
     localStorage.setItem('panier', JSON.stringify(cameras));// sur une key/value mettre le panier dans le LS
     window.location.reload();// recharge la ressource depuis l'URL actuelle
   }
