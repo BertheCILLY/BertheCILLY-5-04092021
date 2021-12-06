@@ -109,7 +109,7 @@ function sendOrder() {// méthode reportValidity, renvoie true
       })
       .then(function (r) {
         //clear the localStorage after command
-        localStorage.clear();
+        localStorage.removeItem('panier');
         //redirection vers confirmation.html
         localStorage.setItem("contact", JSON.stringify(r.contact));
         window.location.assign("confirmation.html?orderId=" + r.orderId);
